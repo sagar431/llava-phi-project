@@ -1,0 +1,36 @@
+{
+    "model_params": {
+        "model_name": "microsoft/phi-1_5",
+        "clip_model_name": "openai/clip-vit-base-patch32",
+        "max_length": 512,
+        "load_in_4bit": true
+    },
+    "training_params": {
+        "num_epochs": 3,
+        "batch_size": 32,
+        "gradient_accumulation_steps": 2,
+        "learning_rate": 5e-5,
+        "weight_decay": 0.01,
+        "warmup_ratio": 0.03,
+        "eval_steps": 100,
+        "save_steps": 200,
+        "max_grad_norm": 1.0,
+        "mixed_precision": "bf16",
+        "gradient_checkpointing": true,
+        "dataloader_num_workers": 4,
+        "prefetch_factor": 2
+    },
+    "lora_params": {
+        "r": 16,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05,
+        "target_modules": ["Wqkv", "out_proj"]
+    },
+    "data_params": {
+        "json_path": "data/instructions.json",
+        "image_folder": "data/images",
+        "max_length": 512,
+        "image_size": 224,
+        "train_split": 0.9
+    }
+}
